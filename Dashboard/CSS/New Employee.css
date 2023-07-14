@@ -1,0 +1,84 @@
+form
+{
+    margin-left: 340px;
+    width: 700px;
+    border-radius: 20px;
+    padding: 0 30px;
+}
+form h1
+{
+    margin-top: 20px;
+    padding-left: 25%;
+    color: black;
+    font-size: 30px;
+}
+form table
+{
+    padding-top: 10px;
+    border-spacing: 5px;
+}
+td
+{
+    margin-left: 40px;
+}
+form table input
+{
+    padding: 15px;
+    height: 10px;
+    width: 250px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+select, textarea
+{
+    border-radius: 5px;
+    height: 40px;
+    width: auto;
+    background-color: #ffffff;
+    padding: 10px;
+}
+textarea
+{
+    width: 100%;
+}
+select
+{
+    width: 100%;
+}
+input:hover, select:hover, textarea:hover
+{
+    cursor: pointer;
+}
+input[type=date]
+{
+    width: 100%;
+}
+input[type=file]
+{
+    width: 90%;
+    height: 17px;
+    padding-bottom: 50px;
+    cursor: pointer;
+}
+button
+{
+    border-radius: 5px;
+    height: 40px;
+    margin-top: 20px;
+    background-color: #04AA6D;
+    color: white;
+    width: 190px;
+    margin-left: 45%;
+    padding: 10px;
+}
+button:hover
+{
+    opacity: 1;
+    background-color: rgb(28, 126 , 28);
+    cursor: pointer;
+}
+span
+{
+    color: red;
+    font-size: 18px;
+}

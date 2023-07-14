@@ -1,0 +1,58 @@
+*
+{
+    box-sizing: border-box;
+}
+form
+{
+    position: absolute;
+    right: 0;
+    margin: 50px 30px 30px;
+    max-width: 385px;
+    padding: 16px;
+    background-color: white;
+    height: max-content;
+}
+h1
+{
+    font-size: 25px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+input
+{
+    width: 100%;
+    padding: 20px;
+    margin: 0 0 22px 0;
+    border: none;
+    background: #f1f1f1;
+}
+button
+{
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+button:hover
+{
+    opacity: 1;
+    background-color: rgb(28, 126, 28);
+}
+a
+{
+    background-color: #f44336;
+    color: white;
+    padding: 14px 20px;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+h1, label, input, button, a
+{
+    margin-top: 20px;
+}

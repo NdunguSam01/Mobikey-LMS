@@ -1,0 +1,44 @@
+* 
+{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+form
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-left: 290px;
+}
+h1
+{
+    text-align: center;
+}
+table
+{
+    width: max-content;
+}
+td, input
+{
+    padding: 5px;
+}
+input
+{
+    border-radius: 5px;
+}
+button
+{
+    border-radius: 5px;
+    height: 40px;
+    margin-top: 20px;
+    background-color: rgb(28, 126 , 28);
+    color: white;
+    width: 190px;
+    margin-left: 35%;
+    padding: 10px;
+}
+button:hover
+{
+    cursor: pointer;
+}

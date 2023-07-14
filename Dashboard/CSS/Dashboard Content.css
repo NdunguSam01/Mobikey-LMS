@@ -1,0 +1,20 @@
+.welcome-txt
+{
+    margin-left: 450px;
+    margin-top: 10px;
+    width: 650px;
+    height: 150px;
+}
+.profile-img
+{
+    float: left;
+    width: 150px;
+    height: 150px;
+    margin-right: 50px;
+    border-radius: 10px;
+}
+h1
+{
+    text-align: center;
+    padding-top: 30px;
+}
