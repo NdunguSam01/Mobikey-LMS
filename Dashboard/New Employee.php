@@ -23,7 +23,7 @@ if (isset($_POST['create_employee']))
 
     //Setting the username
     $firstLetter=substr($fname,0,1);
-    $username=strtolower($firstLetter.$lname);
+    $username=strtolower($firstLetter.$lname); 
 
     //Generating a random password
     $password=generateRandomPassword(15);
@@ -32,81 +32,84 @@ if (isset($_POST['create_employee']))
     $hashedPassword=md5($password);
 
     //Querying the database to see if the record exists
-    $query="SELECT * FROM users";
+    $query="SELECT *  FROM `users` WHERE userName='$username' OR email='$email'";
     $result=mysqli_query($conn,$query);
-    $row=mysqli_fetch_assoc($result);
 
-    if($row['fname']==$fname && $row['lname']==$lname)
+    if(mysqli_num_rows($result)>0)
     {
-        $_SESSION['employee_creation']="First and last taken";
-        $_SESSION['employee_creation_msg']='Account with the given names exists';
+        $row=mysqli_fetch_assoc($result);
+        if($row['userName']==$username)
+        {
+            $_SESSION['employee_creation']='Username taken';
+            $_SESSION['employee_creation_msg']='The names entered are linked with a different account';
 
-        //Clearing form data such that it is not re-submitted when page is refreshed
-        header('Location: ./New Employee');// Redirect to another page
-        exit();
-    }
-    elseif ($row['email']==$email) 
-    {
-        $_SESSION['employee_creation']="Email already exists";
-        $_SESSION['employee_creation_msg']='Email is associated with a different account';
+            //Clearing form data such that it is not re-submitted when page is refreshed
+            header('Location: ./New Employee');// Redirect to another page
+            exit();
+        }
+        elseif($row['email']==$email)
+        {
+            $_SESSION['employee_creation']='Email taken';
+            $_SESSION['employee_creation_msg']='Email is linked with a different account';
 
-        //Clearing form data such that it is not re-submitted when page is refreshed
-        header('Location: ./New Employee');// Redirect to another page
-        exit();
-    }
-    elseif ($row['userName']==$username) 
-    {
-        $_SESSION['employee_creation']="Username already exists";
-        $_SESSION['employee_creation_msg']='Username is associated with a different account';
-
-        //Clearing form data such that it is not re-submitted when page is refreshed
-        header('Location: ./New Employee');// Redirect to another page
-        exit();
+            //Clearing form data such that it is not re-submitted when page is refreshed
+            header('Location: ./New Employee');// Redirect to another page
+            exit();
+        }
     }
     else
     {
-        //Creating the email message
-        $loginLink="<a href='http://mobikey-leave-tracker.liveblog365.com/Login/' target='_blank'>Login page</a>";
-        $message="Dear ".$fname." ".$mname." ".$lname.","."<br><br>".
-        "Your leave management system account has been created successfully. Use the login credentials below to login"."<br>"."<br>".
-        "Link to the login page: ".$loginLink."<br><br>".
-        "Username: ".$username."<br><br>".
-        "Password: ".$password."<br><br>".
-        "Kindly do not share your login credentials with anyone else"
-        ;
-        $message=wordwrap($message,70);
-        echo $message;
-
-        // Setting the email body and email recipient
-        $mailer->addAddress($email, $fname." ".$lname);
-        $mailer->Subject="Leave Management System-Account creation";
-        $mailer->Body=$message;
-        $mailer->AltBody=strip_tags($message);
-
-        if(!$mailer->send())
+        //Inserting information into the database
+        $insert="INSERT INTO `users`(`fname`, `mname` ,`lname`, `userName`, `email`, `startDate`, `section`, `department`, `position`, `role`, `password`) VALUES ('$fname','$mname','$lname','$username','$email','$startDate','$section','$department','$position','$role','$hashedPassword')";
+        if(mysqli_query($conn,$insert))
         {
-            $_SESSION['employee_creation']="Email send failed";
-            $_SESSION['employee_creation_msg']="Email could not be sent: ".$mailer->ErrorInfo;
+            //Creating the email message
+            $loginLink="<a href='http://mobikey-leave-tracker.liveblog365.com/Login/' target='_blank'>Login page</a>";
+            $message="Dear ".$fname." ".$mname." ".$lname.","."<br><br>".
+            "Your leave management system account has been created successfully. Use the login credentials below to login"."<br>"."<br>".
+            "Link to the login page: ".$loginLink."<br><br>".
+            "Username: ".$username."<br><br>".
+            "Password: ".$password."<br><br>".
+            "Kindly do not share your login credentials with anyone else"
+            ;
+            $message=wordwrap($message,70);
 
-            //Clearing form data such that it is not re-submitted when page is refreshed
-            header('Location: ./New Employee');// Redirect to another page
-            exit();
+            // Setting the email body and email recipient
+            $mailer->addAddress($email, $fname." ".$lname);
+            $mailer->Subject="Leave Management System-Account creation";
+            $mailer->Body=$message;
+            $mailer->AltBody=strip_tags($message);
+
+            if(!$mailer->send())
+            {
+                $_SESSION['employee_creation']="Email send failed";
+                $_SESSION['employee_creation_msg']="Email could not be sent: ".$mailer->ErrorInfo;
+
+                //Clearing form data such that it is not re-submitted when page is refreshed
+                header('Location: ./New Employee');// Redirect to another page
+                exit();
+            }
+            else
+            {
+                //Creating a session to be used in the toast message
+                $_SESSION['employee_creation']="Successful";
+                $_SESSION['employee_creation_msg']='Account created successfully';
+
+                //Clearing form data such that it is not re-submitted when page is refreshed
+                header('Location: ./New Employee');// Redirect to another page
+                exit();
+            }
         }
         else
         {
-            //Inserting information into the database
-            $insert="INSERT INTO `users`(`fname`, `mname` ,`lname`, `userName`, `email`, `startDate`, `section`, `department`, `position`, `role`, `password`) VALUES ('$fname','$mname','$lname','$username','$email','$startDate','$section','$department','$position','$role','$hashedPassword')";
-            mysqli_query($conn,$insert);
- 
             //Creating a session to be used in the toast message
-            $_SESSION['employee_creation']="Successful";
-            $_SESSION['employee_creation_msg']='Account created successfully';
- 
+            $_SESSION['employee_creation']="Save failed";
+            $_SESSION['employee_creation_msg']='Error saving information in the database';
+
             //Clearing form data such that it is not re-submitted when page is refreshed
             header('Location: ./New Employee');// Redirect to another page
             exit();
-        }
-
+        }        
     }
 }
 ?>
@@ -201,7 +204,7 @@ if (isset($_POST['create_employee']))
                     </select>
                 </td>
                 <td>
-                    <input type="text" name="position" placeholder="Position" autocomplete="off">
+                    <input type="text" name="position" placeholder="Position" autocomplete="off" required>
                 </td>
                 <td>
                     <select name="role" required>
@@ -220,7 +223,7 @@ if (isset($_POST['create_employee']))
     include_once './Includes/Scripts.php';
     include_once './Includes/Toasts.php'
     ?>
-    <script src="./JS/Date Disable.js"></script>
+    <script src='./JS/Date Disable.js'></script>
     <script>
         <?php
 
@@ -234,7 +237,7 @@ if (isset($_POST['create_employee']))
                 unset($_SESSION["employee_creation"]);
                 unset($_SESSION["employee_creation_msg"]);
             }
-            elseif($_SESSION["employee_creation"]=="Email already exists")
+            elseif($_SESSION["employee_creation"]=="Email taken")
             {
                 ?>
                 toastr.warning("<?php echo $_SESSION["employee_creation_msg"];?>")
@@ -242,7 +245,15 @@ if (isset($_POST['create_employee']))
                 unset($_SESSION["employee_creation"]);
                 unset($_SESSION["employee_creation_msg"]);
             }
-            elseif($_SESSION["employee_creation"]=="First and last taken")
+            elseif($_SESSION["employee_creation"]=="Username taken")
+            {
+                ?>
+                toastr.warning("<?php echo $_SESSION["employee_creation_msg"];?>")
+                <?php
+                unset($_SESSION["employee_creation"]);
+                unset($_SESSION["employee_creation_msg"]);
+            }
+            elseif($_SESSION["employee_creation"]=="Save failed")
             {
                 ?>
                 toastr.warning("<?php echo $_SESSION["employee_creation_msg"];?>")
