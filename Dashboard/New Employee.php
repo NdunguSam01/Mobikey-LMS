@@ -120,7 +120,7 @@ if (isset($_POST['create_employee']))
     include_once './Includes/Header.php';
     include_once './Includes/Styles.php';
     ?>
-    <link rel="stylesheet" href="./CSS/New Employee.css">
+    <link rel="stylesheet" href="./CSS/Form.css">
 </head>
 <body>
     <?php
