@@ -16,7 +16,7 @@
             </div>
         </div>
         <?php
-        if($_SESSION['role']=='HOD')
+        if($_SESSION['role']=='HOD' || $_SESSION['role']=="General Manager")
         {
             ?>
             <div class="item">
@@ -24,7 +24,7 @@
             </div>
             <?php
         }
-        elseif($_SESSION["role"]=='HR' || $_SESSION['role']=="General Manager")
+        elseif($_SESSION["role"]=='HR' )
         {
             ?>
             <div class="item">
