@@ -20,6 +20,7 @@ if(!$result)
     include_once './Includes/Styles.php';
     ?>
     <link rel="stylesheet" href="./CSS/View Employees.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
     <?php
@@ -36,6 +37,7 @@ if(!$result)
             <th>Section</th>
             <th>Department</th>
             <th>Position</th>
+            <th colspan="2">Action</th>
         </tr>
             <?php
             if(mysqli_num_rows($result)>0)
@@ -50,6 +52,8 @@ if(!$result)
                     echo "<td>". $row["section"]. "</td>";   
                     echo "<td>". $row["department"]. "</td>";
                     echo "<td>". $row["position"]. "</td>";
+                    echo "<td><i class='fa fa-edit'></i></td>";
+                    echo "<td><i class='fa fa-trash-o'></i></td>";
                 }
             }
             else

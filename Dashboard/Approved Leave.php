@@ -23,7 +23,7 @@ if(!$result)
     include_once './Includes/Header.php';
     include_once './Includes/Styles.php';
     ?>
-    <link rel="stylesheet" href="./CSS/Pending Leave.css">
+    <link rel="stylesheet" href="./CSS/Table.css">
 </head>
 <body>
     <?php

@@ -13,7 +13,6 @@ table
     margin-left: 320px;
     margin-right: auto;
     margin-top: 25px;
-    width: 50%;
 }
 th
 {
@@ -24,7 +23,7 @@ th
 }
 th, td
 {
-    text-align: center;
+    text-align: left;
     border: 1px solid #ddd;
     padding: 8px;
     word-wrap: break-word;
@@ -36,8 +35,4 @@ tr:nth-child(even)
 tr:hover
 {
     background-color: #ddd;
-}
-.fa
-{
-    font-size: 25px;
 }
