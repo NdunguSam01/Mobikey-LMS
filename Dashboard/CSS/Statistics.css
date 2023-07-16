@@ -1,0 +1,45 @@
+/*Statistics styling*/
+.row
+{
+    width: 72%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: absolute;
+    left: 62%;
+    transform: translate(-50%,-50%);
+    margin-top: 15%;
+}
+.col
+{
+    flex-basis: 20%;
+    text-align: center;
+    color: #555;
+}
+h4
+{
+    text-transform: uppercase;
+}
+.counter-box
+{
+    width: 100%;
+    height: 100%;
+    background: #12192c;
+    padding: 20px 0;
+    border-radius: 10px;
+    box-shadow: 0 0 20px -4px #66676c;
+    color:#fff;
+}
+.counter,.statistic
+{
+    display: inline-block;
+    margin: 15px 0;
+    font-size: 50px;
+    color: #fff;
+}
+.counter-box .fa,.counter-box .bi
+{
+    font-size: 40px;
+    color: rgba(16, 211, 97, 0.603);
+    display: block;
+}

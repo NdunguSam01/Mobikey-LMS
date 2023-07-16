@@ -22,7 +22,7 @@ if (isset($_POST['reset']))
         $token=bin2hex(random_bytes(15));
 
         //Creating the email message
-        $resetLink="<a href='http://mobikey-leave-tracker.liveblog365.com/Login/Password Reset?token='.$token' target='_blank'>Reset link</a>";
+        $resetLink="<a href='http://mobikey-leave-tracker.liveblog365.com/Login/Password%20Reset?token=$token&email=$email' target='_blank'>Reset link</a>";
         $message="Greetings dear." ."\n". "Click on the link below to reset your password successfully:\n\n". $resetLink;
         $message="
         Greetings."."<br>"."<br>".
@@ -52,11 +52,14 @@ if (isset($_POST['reset']))
             $_SESSION['password_reset_status']="Success";
             $_SESSION['password_reset_msg']="Password reset link has been sent to your email!";
 
+            //Inserting the email and token into databae
+            $insert="INSERT INTO `password_resets`(`email`, `token`) VALUES ('$email','$token')";
+            mysqli_query($conn,$insert);
+
             //Clearing form data such that it is not re-submitted when page is refreshed
             header('Location: ./Forgot Password');// Redirect to another page
             exit();
         }
-
     }
     else
     {
@@ -77,7 +80,7 @@ if (isset($_POST['reset']))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../Background.css">
     <link rel="stylesheet" href="./Toast/CSS/toastr.min.css">
-    <link rel="stylesheet" href="./Forgot.css">
+    <link rel="stylesheet" href="./Form.css">
     <link rel="icon" href="../Images/Favicon.png" type="image/x-icon">
     <title>Leave Management System</title>
 </head>
@@ -87,8 +90,8 @@ if (isset($_POST['reset']))
         <h1>Reset Form</h1>
         <label for="email">Email: </label>
         <input type="email" name="email" placeholder="Email Address" required>
-        <button type="submit" name="reset">Reset password</button>
-        <a href="./">Back to Login</a>
+        <button type="submit" name="reset">Generate password reset token</button>
+        <a href="./" class="login-link">Back to Login</a>
     </form>
     
     <script src="./Toast/JS/jquery.js"></script>

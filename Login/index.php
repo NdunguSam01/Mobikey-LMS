@@ -48,7 +48,7 @@ if(isset($_POST["login"]))
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="./Toast/CSS/toastr.min.css">
         <link rel="stylesheet" href="../Background.css">
-        <link rel="stylesheet" href="./Login.css">
+        <link rel="stylesheet" href="./Form.css">
         <link rel="icon" href="../Images/Favicon.png" type="image/x-icon">
     </head>
     <body>
