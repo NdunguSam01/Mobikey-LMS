@@ -10,7 +10,7 @@
 {
     background: #1b1a1b;
     backdrop-filter: blur(15px);
-    width: 290px;
+    width: 300px;
     height: 100vh;
     position: fixed;
     top: 0;
@@ -27,7 +27,7 @@ header
 }
 img
 {
-    width:290px;
+    width:300px;
     background-color: white;
     height: fit-content;
 }
