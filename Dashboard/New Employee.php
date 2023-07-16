@@ -175,7 +175,8 @@ if (isset($_POST['create_employee']))
                     <select name="section">
                         <option value="">Select Section</option>
                         <option value="Mobikey">Mobikey</option>
-                        <option value="OOTB">Out Of The Box</option>
+                        <option value="JAP/OOTB">JAP Assembler</option>
+                        <option value="JAP/OOTB">Out Of The Box</option>
                     </select>
                 </td>
             </tr>

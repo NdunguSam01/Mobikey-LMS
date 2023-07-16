@@ -19,6 +19,7 @@ if(isset($_POST["submit_request"]))
     $employeeID=$_POST['employeeID'];
     $fname=$_SESSION['fname'];
     $lname=$_SESSION["lname"];
+    $section=$_POST['section'];
     $department=$_POST['department'];
     $type=$_POST["type"];
     $start=$_POST["start"];
@@ -78,7 +79,7 @@ if(isset($_POST["submit_request"]))
                 }
                 else
                 {
-                    $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`) VALUES ('$employeeID','$fname','$lname','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager')";
+                    $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`,`section`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`) VALUES ('$employeeID','$fname','$lname','$section','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager')";
                     mysqli_query($conn,$insert);
 
                     $_SESSION["leave_submission"]="Successful";
@@ -147,9 +148,9 @@ if(isset($_POST["submit_request"]))
                         }
                         else
                         {
-                            $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`) VALUES ('$employeeID','$fname','$lname','$department','$type','$start','$end','$leaveDays','$fileNewName','$directControl','$humanResource','$generalManager')";
+                            $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`,`section`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`) VALUES ('$employeeID','$fname','$lname','$section','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager')";
                             mysqli_query($conn,$insert);
-
+        
                             $_SESSION["leave_submission"]="Successful";
                             $_SESSION['leave_submission_msg']='Request submitted succesfully!';
 
@@ -230,8 +231,9 @@ if(isset($_POST["submit_request"]))
                         // Subtracting Saturdays, Sundays and holidays from the counted days
                         $remainingNumdays=$leaveDays-($saturdayCount*0.5)-($sundayCount*1)-($holidayCount*1);
 
-                        $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`) VALUES ('$employeeID','$fname','$lname','$department','$type','$start','$end','$remainingNumdays','$fileNewName','$directControl','$humanResource','$generalManager')";
+                        $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`,`section`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`) VALUES ('$employeeID','$fname','$lname','$section','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager')";
                         mysqli_query($conn,$insert);
+
 
                         $_SESSION["leave_submission"]="Successful";
                         $_SESSION['leave_submission_msg']='Request submitted succesfully!';
@@ -292,7 +294,7 @@ if(isset($_POST["submit_request"]))
             }
             else
             {
-                $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`) VALUES ('$employeeID','$fname','$lname','$department','$type','$start','$end','$remainingNumdays','NULL','$directControl','$humanResource','$generalManager')";
+                $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`,`section`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`) VALUES ('$employeeID','$fname','$lname','$section','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager')";
                 mysqli_query($conn,$insert);
 
                 $_SESSION["leave_submission"]="Successful";
@@ -385,7 +387,8 @@ if(isset($_POST["submit_request"]))
                 <td>
                     <input type="file" id="file-attachment" name="file-attachment" accept=".png, .jpg, .jpeg, .pdf">
                 </td>
-                <input type="hidden" name="employeeID" value="<?php echo $row['employeeID'];?>">     
+                <input type="hidden" name="employeeID" value="<?php echo $row['employeeID'];?>">
+                <input type="hidden" name="section" value="<?php echo $row['section'];?>">     
                 <input type="hidden" name="department" value="<?php echo $row['department'];?>">       
             </tr>
         </table>
