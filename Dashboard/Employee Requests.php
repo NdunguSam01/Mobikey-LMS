@@ -44,11 +44,13 @@ elseif($_SESSION['role']=="HR")
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <?php
     include_once './Includes/Header.php';
     include_once './Includes/Styles.php';
     ?>
     <link rel="stylesheet" href="./CSS/Table.css">
+    <link rel="stylesheet" href="./CSS/Buttons.css">
 </head>
 <body>
     <?php
@@ -65,7 +67,7 @@ elseif($_SESSION['role']=="HR")
             <th>End Date</th>
             <th>Number of Days</th>
             <th>File attachment</th>
-            <th>Action</th>
+            <th colspan="2" style="text-align: center;">Action</th>
         </tr>
         <tr>
             <?php
@@ -86,7 +88,7 @@ elseif($_SESSION['role']=="HR")
         </tr>
 
     </table>
-
+    <a href="./Sick Leave/<?php echo $requestRow['filePath'];?>"></a>
     <?php
     include_once './Includes/Scripts.php';
     ?>

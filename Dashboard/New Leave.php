@@ -13,6 +13,9 @@ $query="SELECT * FROM users WHERE fname='$fname'";
 $result=mysqli_query($conn,$query);
 $row=mysqli_fetch_array($result);
 
+//Setting the default time zone
+date_default_timezone_set('Africa/Nairobi');
+
 if(isset($_POST["submit_request"]))
 {
     //Initializing variables to be inserted into DB
@@ -25,6 +28,7 @@ if(isset($_POST["submit_request"]))
     $start=$_POST["start"];
     $end=$_POST["end"];
     $reason=$_POST["reason"];
+    $submissionDate=date("Y-m-d H:i:s");
 
     if($_SESSION["role"]=="HOD")
     {
@@ -79,7 +83,7 @@ if(isset($_POST["submit_request"]))
                 }
                 else
                 {
-                    $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`,`section`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`) VALUES ('$employeeID','$fname','$lname','$section','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager')";
+                    $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`,`section`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`, `submissionDate`) VALUES ('$employeeID','$fname','$lname','$section','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager','$submissionDate')";
                     mysqli_query($conn,$insert);
 
                     $_SESSION["leave_submission"]="Successful";
@@ -148,7 +152,7 @@ if(isset($_POST["submit_request"]))
                         }
                         else
                         {
-                            $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`,`section`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`) VALUES ('$employeeID','$fname','$lname','$section','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager')";
+                            $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`,`section`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`, `submissionDate`) VALUES ('$employeeID','$fname','$lname','$section','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager','$submissionDate')";
                             mysqli_query($conn,$insert);
         
                             $_SESSION["leave_submission"]="Successful";
@@ -231,7 +235,7 @@ if(isset($_POST["submit_request"]))
                         // Subtracting Saturdays, Sundays and holidays from the counted days
                         $remainingNumdays=$leaveDays-($saturdayCount*0.5)-($sundayCount*1)-($holidayCount*1);
 
-                        $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`,`section`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`) VALUES ('$employeeID','$fname','$lname','$section','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager')";
+                        $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`,`section`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`, `submissionDate`) VALUES ('$employeeID','$fname','$lname','$section','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager','$submissionDate')";
                         mysqli_query($conn,$insert);
 
 
@@ -294,7 +298,7 @@ if(isset($_POST["submit_request"]))
             }
             else
             {
-                $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`,`section`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`) VALUES ('$employeeID','$fname','$lname','$section','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager')";
+                $insert="INSERT INTO `leavedays`(`employeeID`, `fname`, `lname`,`section`, `department`,`leaveType`, `startDate`, `endDate`, `numDays`, `filePath`, `directControl`, `humanResource`, `generalManager`, `submissionDate`) VALUES ('$employeeID','$fname','$lname','$section','$department','$type','$start','$end','$leaveDays','NULL','$directControl','$humanResource','$generalManager','$submissionDate')";
                 mysqli_query($conn,$insert);
 
                 $_SESSION["leave_submission"]="Successful";

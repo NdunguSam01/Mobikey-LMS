@@ -10,8 +10,23 @@
             echo "<td>". $requestRow['startDate']. "</td>";   
             echo "<td>". $requestRow['endDate']. "</td>";   
             echo "<td>". $requestRow['numDays']. "</td>";
-            echo "<td>". $requestRow['filePath']. "</td>";
-            echo "<td><a href='#'>View</a></td>";
+            if($requestRow['filePath']=="NULL")
+            {
+                echo "<td>No file attachment</td>";
+            }
+            elseif($requestRow['leaveType']=="Paternity")
+            {
+                $file=$requestRow["filePath"];
+                echo "<td><a href='./Sick Leave/<?php echo $file;?>'></a></td>";
+            }
+            elseif($requestRow['leaveType']=="Sick")
+            {
+                $file=$requestRow["filePath"];
+                echo "<td><a href='./Sick Leave/<?php echo $file;?>'></a></td>";
+            }
+            echo "<td><button type='submit' name='approve' id='approve' title='Approve request'>Approve request</button></td>";
+            echo "<td><button type='submit' name='reject' id='reject' title='Reject request'>Reject request</button></td>";
+            ;
         }
     }
     else

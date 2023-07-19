@@ -1,0 +1,20 @@
+#approve
+{
+    background-color: #04AA6D;
+}
+#approve:hover, #reject:hover
+{
+    cursor: pointer;
+
+}
+#reject
+{
+    background-color: rgb(206, 22, 22);
+}
+#approve,#reject
+{
+    padding: 10px;
+    width: max-content;
+    border: none;
+    border-radius: 5px;
+}
