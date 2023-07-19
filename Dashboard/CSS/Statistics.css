@@ -1,24 +1,22 @@
-/*Statistics styling*/
-.row
+.grid
 {
-    width: 72%;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    position: absolute;
-    left: 62%;
-    transform: translate(-50%,-50%);
-    margin-top: 15%;
+    width: auto;
+    height: auto;
+    display: grid;
+    margin: auto;
+    grid-template-columns: auto auto auto auto;
+    background-color: inherit;
+    padding: 5px;
+    margin-left: 20%;
 }
-.col
+.stat-box
 {
+    background-color: transparent;
+    padding: 20px;
+    text-align: center;
     flex-basis: 20%;
     text-align: center;
     color: #555;
-}
-h4
-{
-    text-transform: uppercase;
 }
 .counter-box
 {
@@ -26,6 +24,7 @@ h4
     height: 100%;
     background: #12192c;
     padding: 20px 0;
+    margin-left: 10%;
     border-radius: 10px;
     box-shadow: 0 0 20px -4px #66676c;
     color:#fff;
@@ -42,4 +41,29 @@ h4
     font-size: 40px;
     color: rgba(16, 211, 97, 0.603);
     display: block;
+}
+h4
+{
+    text-transform: uppercase;
+}
+@media screen and (max-width: 767px) /*Responsive grid for smartphones*/
+{
+    .grid
+    {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media (min-width: 767px) and (max-width:1023px)/*Responsive grid for tablets*/
+{
+    .grid
+    { 
+        grid-template-columns: repeat(4, 1fr); 
+    }
+}
+@media (min-width: 1024px)/*Responsive grid for desktops*/
+{
+    .grid
+    { 
+        grid-template-columns: repeat(4, 1fr); 
+    }
 }

@@ -32,22 +32,22 @@ $row=mysqli_fetch_array($result);
             </tr>
             <tr>
                 <td>First Name</td>
+                <td>Middle Name</td>
                 <td>Last Name</td>
                 <td>Email Address</td>
-                <td>Phone Number</td>
             </tr>
             <tr>
                 <td>
                     <input type="text" readonly disabled value="<?php echo $_SESSION["fname"];?>">
                 </td>
                 <td>
+                    <input type="text" readonly disabled value="<?php echo $row["mname"];?>">
+                </td>
+                <td>
                     <input type="text" readonly disabled value="<?php echo $_SESSION["lname"];?>">
                 </td>
                 <td>
                     <input type="email" readonly disabled value="<?php echo $row["email"];?>">
-                </td>
-                <td>
-                    <input type="text" readonly disabled value="<?php echo $row["phone"];?>">
                 </td>
             </tr>
             <tr>

@@ -1,5 +1,4 @@
 <?php
-session_start();
 
 include_once './Sessions.php';
 include_once '../Database/Connection.php';
